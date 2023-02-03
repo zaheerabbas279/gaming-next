@@ -1,8 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import AuthContext from "../stores/authContext";
 import styles from "../styles/Navbar.module.css";
 
 export default function Navbar() {
+  const { user, login, logout } = useContext(AuthContext);
+  console.log("🚀 ~ file: Navbar.js:9 ~ Navbar ~ user", user);
+
   return (
     <>
       <div className={styles.navbar_container}>
@@ -25,6 +30,12 @@ export default function Navbar() {
               <strong>About</strong>
             </p>
           </Link>
+          <button className={styles.btn_login} onClick={login}>
+            Login/Sign up
+          </button>
+          <button className={styles.btn_login} onClick={logout}>
+            Logout
+          </button>
         </div>
       </div>
     </>
