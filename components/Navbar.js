@@ -5,7 +5,7 @@ import AuthContext from "../stores/authContext";
 import styles from "../styles/Navbar.module.css";
 
 export default function Navbar() {
-  const { user, login, logout } = useContext(AuthContext);
+  const { user, login, logout, authReady } = useContext(AuthContext);
   console.log("🚀 ~ file: Navbar.js:9 ~ Navbar ~ user", user);
 
   return (
@@ -19,24 +19,36 @@ export default function Navbar() {
         />
         <h1 className={styles.navbar_heading}>Next Gaming</h1>
 
-        <div className={styles.navbar_options}>
-          <Link href="#">
-            <p className={styles.nav_link}>
-              <strong>Home</strong>
-            </p>
-          </Link>
-          <Link href="#">
-            <p className={styles.nav_link}>
-              <strong>About</strong>
-            </p>
-          </Link>
-          <button className={styles.btn_login} onClick={login}>
-            Login/Sign up
-          </button>
-          <button className={styles.btn_login} onClick={logout}>
-            Logout
-          </button>
-        </div>
+        {authReady && (
+          <div className={styles.navbar_options}>
+            <Link href="#">
+              <p className={styles.nav_link}>
+                <strong>Home</strong>
+              </p>
+            </Link>
+            <Link href="#">
+              <p className={styles.nav_link}>
+                <strong>About</strong>
+              </p>
+            </Link>
+            <Link href="/games">
+              <p className={styles.nav_link}>
+                <strong>Games Guide</strong>
+              </p>
+            </Link>
+            {user && <span>{user.email}</span>}
+            {!user && (
+              <button className={styles.btn_login} onClick={login}>
+                Login/Sign up
+              </button>
+            )}
+            {user && (
+              <button className={styles.btn_login} onClick={logout}>
+                Logout
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

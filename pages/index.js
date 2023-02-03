@@ -10,17 +10,19 @@ export default function Home() {
     <>
       <div
         style={{
-          width: "100%",
-          height: 200,
-          position: "relative",
+          // width: "100%",
+          // height: 200,
+          // position: "relative",
+          display:'flex',
+          justifyContent:'center'
         }}
       >
         <Image
           src={"/banner.jpg"}
           alt="banner"
           className="banner_image"
-          layout="fill"
-          objectFit="cover"
+          height={400}
+          width={1000}
         />
       </div>
 
