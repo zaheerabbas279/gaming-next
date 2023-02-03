@@ -1,30 +1,42 @@
 import Image from "next/image";
 import styles from "../styles/GamesInfo.module.css";
+import Link from "next/link";
+import { useContext } from "react";
+import AuthContext from "../stores/authContext";
 export default function GamesInfo({ games }) {
-  console.log("gaems info", games);
   const ori = "http://localhost:3000/";
+  const { user } = useContext(AuthContext);
+  console.log("🚀 ~ file: Navbar.js:9 ~ Navbar ~ user", user);
 
   return (
     <>
       <div className="gamediv">
-        {/* <h4>{games.title}</h4> */}
-        {games.map((game) => {
-          return (
-            <div className="card">
-              <div className="imageDiv">
-                <img src={game.image} alt="" className={styles.game_image}/>
-                {/* <Image
-                  //   src={`${ori game.image}`}
-                  src={ori + game.image}
-                  height={200}
-                  width={200}
-                  alt="Game"
-                /> */}
-              </div>
-              <h4>{game.title}</h4>
-            </div>
-          );
-        })}
+        {user ? (
+          <>
+            {games.map((game) => {
+              return (
+                <div className={styles.card}>
+                  <div className="imageDiv">
+                    <img
+                      src={game.image}
+                      alt=""
+                      className={styles.game_image}
+                    />
+                  </div>
+                  <div className={styles.info}>
+                    <h2 style={{ margin: "0px" }}>{game.title}</h2>
+                    <p className={styles.description}>{game.description}</p>
+                    <Link href={game.link}>Read More...</Link>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            <h4>You need to login to view the guide!</h4>
+          </>
+        )}
       </div>
     </>
   );

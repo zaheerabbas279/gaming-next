@@ -21,7 +21,7 @@ export default function Navbar() {
 
         {authReady && (
           <div className={styles.navbar_options}>
-            <Link href="#">
+            <Link href="/">
               <p className={styles.nav_link}>
                 <strong>Home</strong>
               </p>
